@@ -1,0 +1,4 @@
+#example ceph osd disk configuration 
+cephdeploy::osdwrapper::disks
+  - sdb
+  - sdc
