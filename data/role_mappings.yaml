@@ -23,3 +23,6 @@ swift-proxy02: swift_proxy
 swift-storage01: swift_storage
 swift-storage02: swift_storage
 swift-storage03: swift_storage
+ceph.cisco.com: all_in_one
+ceph.cisco.com: all_in_one
+ceph.cisco.com: all_in_one

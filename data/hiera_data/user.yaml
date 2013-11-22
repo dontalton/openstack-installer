@@ -1,0 +1,24 @@
+domain_name: "cisco.com"
+ntp_servers:
+  - ntp.ubuntu.com
+
+# node addresses
+build_node_name: ceph.cisco.com
+controller_internal_address: "10.0.0.1"
+controller_public_address: "10.0.0.1"
+controller_admin_address: "10.0.0.1"
+swift_internal_address: "10.0.0.1"
+swift_public_address: "10.0.0.1"
+swift_admin_address: "10.0.0.1"
+
+# physical interface definitions
+external_interface: eth2
+public_interface: eth1
+private_interface: eth1
+
+internal_ip: "%{ipaddress}"
+swift_local_net_ip: "%{ipaddress}"
+nova::compute::vncserver_proxyclient_address: "0.0.0.0"
+
+quantum::agents::ovs::local_ip: "%{ipaddress}"
+neutron::agents::ovs::local_ip: "%{ipaddress}"

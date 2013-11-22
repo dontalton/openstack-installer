@@ -18,18 +18,7 @@ apt-get update
 apt-get install -y git apt rubygems puppet
 
 # use the domain name if one exists
-if [ "`hostname -d`" != '' ]; then
-  domain=`hostname -d`
-else
-  # otherwise use the domain
-  domain='domain.name'
-fi
-# puppet's fqdn fact explodes if the domain is not setup
-if grep 127.0.1.1 /etc/hosts ; then
-  sed -i -e "s/127.0.1.1.*/127.0.1.1 $(hostname).$domain $(hostname)/" /etc/hosts
-else
-  echo "127.0.1.1 $(hostname).$domain $(hostname)" >> /etc/hosts
-fi;
+domain='cisco.com'
 
 # Install openstack-installer
 cd /root/
@@ -43,14 +32,14 @@ if ${master}; then
   export build_server="${build_server:-`hostname`}"
   # We need to know the IP address as well, so either tell me
   # or I will assume it's the address associated with eth0
-  export default_interface="${default_interface:-eth0}"
+  export default_interface="${default_interface:-eth1}"
   # So let's grab that address
   export build_server_ip="${build_server_ip:-`ip addr show ${default_interface} | grep 'inet ' | tr '/' ' ' | awk -F' ' '{print $2}'`}"
   # Our default mode also assumes at least one other interface for OpenStack network
-  export external_interface="${external_interface:-eth1}"
+  export external_interface="${external_interface:-eth2}"
 
   # For good puppet hygene, we'll want NTP setup.  Let's borrow one from Cisco
-  export ntp_server="${ntp_server:-ntp.esl.cisco.com}"
+  export ntp_server="${ntp_server:-ntp.ubuntu.com}"
 
   # Since this is the master script, we'll run in apply mode
   export puppet_run_mode="apply"
@@ -102,6 +91,8 @@ EOF
   export FACTER_build_server=${build_server}
 
 fi
+
+echo "Hey check cephdeploy here"
 
 export FACTER_build_server_domain_name=${domain}
 export FACTER_build_server_ip=${build_server_ip}

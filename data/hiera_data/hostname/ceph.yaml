@@ -1,0 +1,3 @@
+cephdeploy::osdwrapper::disks:
+  - sdb
+  - sdc
